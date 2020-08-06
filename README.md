@@ -10,3 +10,5 @@ cp -r ./dist ./node_modules/higlass/dist
 # run the demo
 npm run start
 ```
+
+Zarr files have been generated using this script https://github.com/hms-dbmi/cistrome-explorer/blob/keller-mark/zarr-for-serverless/pipelines/cistrome-to-multivec/src/manifest_to_zarr.py
