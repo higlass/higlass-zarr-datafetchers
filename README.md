@@ -5,10 +5,18 @@ These plugins allow data to be stored in object stores such as S3 (rather than u
 
 ```sh
 npm install
-# replace higlass dist/ // TODO: remove this step once plugin datafetcher support is released on NPM
+
+# Replace node_modules/higlass/dist directory
+# TODO: remove this step once plugin datafetcher support is released on NPM
 rm -r ./node_modules/higlass/dist
 cp -r ./higlass-dist ./node_modules/higlass/dist
-# run the demo
+# Replace node_modules/higlass-register/dist directory
+# TODO: remove this step once plugin datafetcher support is released on NPM
+rm -r ./node_modules/higlass-register/dist
+cp -r ./higlass-register-dist ./node_modules/higlass-register/dist
+
+
+# Run the demo
 npm run start
 ```
 

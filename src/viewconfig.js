@@ -25,10 +25,12 @@ const viewconfig = {
         "tracks": {
           "top": [
             {
-              "type": "horizontal-chromosome-labels",
+              "type": "zarr-horizontal-chromosome-labels",
               "uid": "GzHGPlijS2eASBqslzVcxA",
-              "tilesetUid": "ZpZ8c5JJRUS1J7ZkofcUrg",
-              "server": "https://resgen.io/api/v1",
+              "data": {
+                "type": "zarr-chromsizes",
+                "url": "http://higlass-serverless.s3.amazonaws.com/chromsizes/hg38.zarr",
+              },
               "options": {
                 "showMousePosition": false,
                 "mousePositionColor": "#999999",
@@ -105,10 +107,8 @@ const viewconfig = {
               "uid": "cistrome-aggregation-test-track-1",
               "data": {
                 "type": "zarr-multivec",
-               "url": "http://higlass-serverless.s3.amazonaws.com/multivec/Homo_sapiens__AFF4__all.multires.zarr",
-                "filetype": "multivec",
+                "url": "http://higlass-serverless.s3.amazonaws.com/multivec/Homo_sapiens__AFF4__all.multires.zarr",
               },
-              "coordSystem": "hg38",
               "options": {
                 "labelPosition": "hidden",
                 "labelColor": "black",
