@@ -6,7 +6,7 @@ This is a plugin datafetcher for loading zarr-based multivec files (stored in S3
 npm install
 # replace higlass dist/
 rm -r ./node_modules/higlass/dist
-cp -r ./dist ./node_modules/higlass/dist
+cp -r ./higlass-dist ./node_modules/higlass/dist
 # run the demo
 npm run start
 ```

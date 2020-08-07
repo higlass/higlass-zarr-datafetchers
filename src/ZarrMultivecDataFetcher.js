@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import { HTTPStore, openArray, slice } from 'zarr';
-import { abs2genomic, genomicRangeToChromosomeChunks, multivecChunksToTileDenseArray } from './utils';
+import { multivecChunksToTileDenseArray } from './utils';
 
 const ZarrMultivecDataFetcher = function ZarrMultivecDataFetcher(HGC, ...args) {
 
@@ -10,7 +10,14 @@ const ZarrMultivecDataFetcher = function ZarrMultivecDataFetcher(HGC, ...args) {
         );
     }
 
-    const { absToChr, DenseDataExtrema1D, minNonZero, maxNonZero } = HGC.utils;
+    const {
+      absToChr,
+      parseChromsizesRows,
+      genomicRangeToChromosomeChunks,
+      DenseDataExtrema1D,
+      minNonZero,
+      maxNonZero,
+    } = HGC.utils;
 
     class ZarrMultivecDataFetcherClass {
         constructor(dataConfig) {
@@ -125,13 +132,12 @@ const ZarrMultivecDataFetcher = function ZarrMultivecDataFetcher(HGC, ...args) {
         
               // Adapted from clodius.tiles.multivec.get_tile
               // Reference: https://github.com/higlass/clodius/blob/develop/clodius/tiles/multivec.py#L110
-        
-              const [genomicStart, genomicEnd] = abs2genomic(
-                absToChr,
-                chromSizes,
-                tileStart,
-                tileEnd,
-              );
+
+              const chromInfo = parseChromsizesRows(chromSizes);
+              const [chrStart, chrStartPos] = absToChr(tileStart, chromInfo);
+              const [chrEnd, chrEndPos] = absToChr(tileEnd, chromInfo);
+              const genomicStart = { chr: chrStart, pos: chrStartPos };
+              const genomicEnd = { chr: chrEnd, pos: chrEndPos };
         
               // Using the [genomicStart, genomicEnd] range, get an array of "chromosome chunks",
               // where each chunk range starts and ends with the same chromosome.

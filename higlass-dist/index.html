@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HiGlass</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="hglib.css">
+
+<style type="text/css">
+#demo {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  bottom: 1rem;
+  right: 1rem;
+  overflow: hidden;
+}
+</style>
+
+<script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+<script crossorigin src="https://unpkg.com/pixi.js-legacy@5/dist/pixi-legacy.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-bootstrap/0.32.1/react-bootstrap.min.js"></script>
+</head>
+<body>
+  <!--<button onclick="updateSelectedRows()">Go</button>-->
+  <div id="demo"></div>
+</body>
+<script src='hglib.js'></script>
+<script>
+const viewConfig = {
+  "editable": true,
+  "zoomFixed": false,
+  "trackSourceServers": [
+    "https://higlass.io/api/v1"
+  ],
+  "exportViewUrl": "/api/v1/viewconfs",
+  "views": [
+    {
+      "initialXDomain": [
+        -2.3283064365386963e-10,
+        249999999.99999997
+      ],
+      "initialYDomain": [
+        1427772999.601453,
+        1610402869.7313232
+      ],
+      "genomePositionSearchBoxVisible": true,
+      "genomePositionSearchBox": {
+        "autocompleteServer": "https://higlass.io/api/v1",
+        "chromInfoServer": "https://higlass.io/api/v1",
+        "visible": true,
+        "chromInfoId": "hg38"
+      },
+      "tracks": {
+        "top": [
+          {
+            "type": "horizontal-chromosome-labels",
+            "uid": "GzHGPlijS2eASBqslzVcxA",
+            "tilesetUid": "ZpZ8c5JJRUS1J7ZkofcUrg",
+            "server": "https://resgen.io/api/v1",
+            "options": {
+              "showMousePosition": false,
+              "mousePositionColor": "#999999",
+              "color": "#808080",
+              "stroke": "#ffffff",
+              "fontSize": 12,
+              "fontIsLeftAligned": false
+            },
+            "width": 1027,
+            "height": 30
+          },
+          {
+            "type": "horizontal-gene-annotations",
+            "uid": "R6ZZ5LnEQ4ODCWZoE38maw",
+            "tilesetUid": "M9A9klpwTci5Vf4bHZ864g",
+            "server": "https://resgen.io/api/v1",
+            "options": {
+              "labelColor": "black",
+              "labelPosition": "hidden",
+              "plusStrandColor": "blue",
+              "minusStrandColor": "red",
+              "trackBorderWidth": 0,
+              "trackBorderColor": "black",
+              "showMousePosition": false,
+              "name": "gene-annotations-hg38_3d2Hebg.db",
+              "mousePositionColor": "#999999",
+              "fontSize": 10,
+              "labelBackgroundColor": "#ffffff",
+              "labelLeftMargin": 0,
+              "labelRightMargin": 0,
+              "labelTopMargin": 0,
+              "labelBottomMargin": 0,
+              "minHeight": 24,
+              "geneAnnotationHeight": 12,
+              "geneLabelPosition": "outside",
+              "geneStrandSpacing": 4
+            },
+            "width": 568,
+            "height": 70
+          },
+          {
+            "type": "horizontal-bar",
+            "uid": "bmcNxj_MSEar_3nYVMnPnQ",
+            "tilesetUid": "a-iBpdh3Q_uO2FLCWKpOOw",
+            "server": "https://resgen.io/api/v1",
+            "options": {
+              "labelColor": "black",
+              "labelPosition": "topLeft",
+              "axisPositionHorizontal": "right",
+              "barFillColor": "darkgreen",
+              "valueScaling": "linear",
+              "trackBorderWidth": 0,
+              "trackBorderColor": "black",
+              "labelTextOpacity": 0.4,
+              "barOpacity": 1,
+              "name": "conservation (hg38.phastCons100way.bw)",
+              "align": "bottom",
+              "labelLeftMargin": 0,
+              "labelRightMargin": 0,
+              "labelTopMargin": 0,
+              "labelBottomMargin": 0,
+              "labelShowResolution": false,
+              "axisLabelFormatting": "scientific",
+              "labelShowAssembly": true
+            },
+            "width": 568,
+            "height": 42
+          }
+        ],
+        "left": [],
+        "center": [
+          {
+            "type": "horizontal-multivec",
+            "uid": "cistrome-aggregation-test-track-1",
+            "data": {
+              "type": "zarr-multivec",
+             "url": "http://higlass-serverless.s3.amazonaws.com/multivec/transposed/Homo_sapiens__AFF4__all.multires.zarr",
+              //"url": "http://localhost:9000/Homo_sapiens__AEBP2__all.multires.zarr",
+              "filetype": "multivec",
+            },
+            "coordSystem": "hg38",
+            "options": {
+              "labelPosition": "hidden",
+              "labelColor": "black",
+              "labelTextOpacity": 0.4,
+              "valueScaling": "linear",
+              "trackBorderWidth": 0,
+              "trackBorderColor": "black",
+              "heatmapValueScaling": "log",
+              "labelLeftMargin": 0,
+              "labelRightMargin": 0,
+              "labelTopMargin": 0,
+              "labelBottomMargin": 0,
+              "labelShowResolution": true,
+              "minHeight": 100,
+              "colorbarPosition": "bottomLeft",
+              "zeroValueColor": "dimgray",
+              "selectRows": null,
+              "selectRowsAggregationMethod": "server",
+              "selectRowsAggregationMode": "sum",
+              "selectRowsAggregationWithRelativeHeight": false,
+              "colorbarBackgroundColor": "#ffffff",
+              "scaleStartPercent": "0.00000",
+              "scaleEndPercent": "1.00000"
+            },
+            "width": 1607,
+            "height": 682
+          }
+        ],
+        "bottom": [],
+        "right": [],
+        "whole": [],
+        "gallery": []
+      },
+      "layout": {
+        "w": 12,
+        "h": 79,
+        "x": 0,
+        "y": 0
+      },
+      "uid": "cistrome-aggregation-test-view"
+    }
+  ],
+  "zoomLocks": {
+    "locksByViewUid": {},
+    "locksDict": {}
+  },
+  "locationLocks": {
+    "locksByViewUid": {},
+    "locksDict": {}
+  },
+  "valueScaleLocks": {
+    "locksByViewUid": {},
+    "locksDict": {}
+  }
+};
+
+class ZMDF {
+  constructor(afp) {
+    console.log("ZMDF", afp.utils.absToChr);
+    console.log("ZMDF", afp.utils.DenseDataExtrema1D);
+    console.log("ZMDF", afp.utils.minNonZero);
+    console.log("ZMDF", afp.utils.maxNonZero);
+  }
+}
+
+window.higlassDataFetchersByType = {
+
+};
+
+const hgApi = hglib.viewer(
+  document.getElementById('demo'),
+  viewConfig,
+  { bounded: true },
+);
+
+hgApi.setBroadcastMousePositionGlobally(true);
+
+hgApi.on('viewConfig', () => {
+  console.log('View Config changed');
+});
+
+function updateSelectedRows() {
+  const vc = hgApi.getViewConfig();
+  vc.views[0].tracks.center[0].options.selectRowsAggregationMode = "mean";
+  hgApi.setViewConfig(vc);
+}
+
+</script>
+</html>
