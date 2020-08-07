@@ -1,10 +1,11 @@
-# higlass-zarr-multivec-datafetcher
+# higlass-zarr-datafetchers
 
-This is a plugin datafetcher for loading zarr-based multivec files (stored in S3, no need for `higlass-server`).
+This repository contains plugin datafetchers for loading zarr-based files in HiGlass.
+These plugins allow data to be stored in object stores such as S3 (rather than using `higlass-server`).
 
 ```sh
 npm install
-# replace higlass dist/
+# replace higlass dist/ // TODO: remove this step once plugin datafetcher support is released on NPM
 rm -r ./node_modules/higlass/dist
 cp -r ./higlass-dist ./node_modules/higlass/dist
 # run the demo
