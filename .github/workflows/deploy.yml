@@ -1,16 +1,17 @@
-name: npm-publish
+name: Deploy
 on:
   push:
     branches:
       - master
 jobs:
-  npm-publish:
-    name: NPM publish
+  deploy-to-npm:
+    name: Deploy to NPM
+    runs-on: ubuntu-18.04
     steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-node@v1
       with:
-        node-version: '14'
+        node-version: 14
     - run: |
         yarn
         # TODO: remove
