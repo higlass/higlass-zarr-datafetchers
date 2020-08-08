@@ -9,9 +9,10 @@ import ZarrHorizontalChromosomeLabelsTrack from './ZarrHorizontalChromosomeLabel
 
 import './index.scss';
 
-register({ pluginType: 'dataFetcher', dataFetcher: ZarrMultivecDataFetcher, config: ZarrMultivecDataFetcher.config });
-register({ pluginType: 'dataFetcher', dataFetcher: ZarrChromsizesDataFetcher, config: ZarrChromsizesDataFetcher.config });
-register({ pluginType: 'track', track: ZarrHorizontalChromosomeLabelsTrack, config: ZarrHorizontalChromosomeLabelsTrack.config });
+register({ dataFetcher: ZarrMultivecDataFetcher, config: ZarrMultivecDataFetcher.config }, { pluginType: 'dataFetcher' });
+register({ dataFetcher: ZarrChromsizesDataFetcher, config: ZarrChromsizesDataFetcher.config }, { pluginType: 'dataFetcher' });
+register({ track: ZarrHorizontalChromosomeLabelsTrack, config: ZarrHorizontalChromosomeLabelsTrack.config }, { pluginType: 'track' });
 
+console.log(window.higlassTracksByType);
 
 ReactDOM.render(<Demo />, document.getElementById('root'));

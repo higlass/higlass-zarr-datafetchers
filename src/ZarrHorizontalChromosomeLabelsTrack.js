@@ -9,6 +9,7 @@ const ZarrHorizontalChromosomeLabelsTrack = function ZarrHorizontalChromosomeLab
     }
 
     const { HorizontalChromosomeLabels } = HGC.tracks;
+    const { SearchField } = HGC.chromosomes;
 
 
     class ZarrHorizontalChromosomeLabelsTrackClass extends HorizontalChromosomeLabels {
@@ -18,11 +19,15 @@ const ZarrHorizontalChromosomeLabelsTrack = function ZarrHorizontalChromosomeLab
             console.log("ZarrHorizontalChromosomeLabelsTrackClass");
 
             const { dataConfig } = context;
-        
-            if (dataConfig.url) {
-              this.store = new HTTPStore(dataConfig.url);
+            console.log(dataConfig);
 
-            }
+            // TODO
+            
+            this.chromInfo = undefined;
+            this.searchField = new SearchField(this.chromInfo);
+            /*this.rerender(options, true);
+            this.draw();
+            this.animate();*/
         }
 
     } // end class

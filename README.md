@@ -9,12 +9,10 @@ npm install
 # Replace node_modules/higlass/dist directory
 # TODO: remove this step once plugin datafetcher support is released on NPM
 rm -r ./node_modules/higlass/dist
-cp -r ./higlass-dist ./node_modules/higlass/dist
+cp -r ./higlass ./node_modules/higlass/dist
 # Replace node_modules/higlass-register/dist directory
 # TODO: remove this step once plugin datafetcher support is released on NPM
-rm -r ./node_modules/higlass-register/dist
-cp -r ./higlass-register-dist ./node_modules/higlass-register/dist
-
+cp ./higlass-register/index.js ./node_modules/higlass-register/src/index.js
 
 # Run the demo
 npm run start
