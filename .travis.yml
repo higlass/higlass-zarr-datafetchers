@@ -6,8 +6,7 @@ cache:
   directories:
     - node_modules
 before_script:
-  # TODO: remove
-  - rm -r ./node_modules/higlass/dist
+  - rm -r ./node_modules/higlass/dist # TODO: remove
   - cp -r ./higlass ./node_modules/higlass/dist
   - cp ./higlass-register/index.js ./node_modules/higlass-register/src/index.js
 script:
