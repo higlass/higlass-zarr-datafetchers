@@ -5,6 +5,7 @@ on:
       - master
 jobs:
   npm-publish:
+    name: NPM publish
     steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-node@v1
