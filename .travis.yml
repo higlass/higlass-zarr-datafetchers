@@ -1,0 +1,22 @@
+language: node_js
+node_js:
+  - 14
+cache:
+  yarn: true
+  directories:
+    - node_modules
+before_script:
+  # TODO: remove
+  - rm -r ./node_modules/higlass/dist
+  - cp -r ./higlass ./node_modules/higlass/dist
+  - cp ./higlass-register/index.js ./node_modules/higlass-register/src/index.js
+script:
+  - yarn build
+deploy:
+  - provider: npm
+    skip_cleanup: true
+    email: $NPM_EMAIL
+    api_key: $NPM_TOKEN
+    on:
+      branch: master
+keep-history: true
