@@ -1,4 +1,3 @@
-import { HTTPStore, openArray, slice } from 'zarr';
 
 const ZarrHorizontalChromosomeLabelsTrack = function ZarrHorizontalChromosomeLabelsTrack(HGC, ...args) {
 

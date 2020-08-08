@@ -1,12 +1,15 @@
 {
-  "name": "higlass-zarr-multivec-datafetcher",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "author": "",
-  "license": "ISC",
+  "name": "higlass-zarr-datafetchers",
+  "version": "0.1.0",
+  "description": "Fetch HiGlass track data from Zarr stores",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/keller-mark/higlass-zarr-datafetchers"
+  },
+  "main": "build-pkg/index.min.js",
+  "author": "Mark Keller",
+  "license": "MIT",
   "dependencies": {
-    "uuid": "^8.3.0",
     "zarr": "^0.3.0"
   },
   "devDependencies": {
@@ -39,6 +42,9 @@
     "sass": "^1.25.0"
   },
   "scripts": {
-    "start": "rollup -c rollup.demo.config.js --environment NODE_ENV:development --watch"
+    "start": "rollup -c rollup.demo.config.js --environment NODE_ENV:development --watch",
+    "build": "yarn build-demo && yarn build-pkg",
+    "build-demo": "rollup -c rollup.demo.config.js --environment NODE_ENV:production",
+    "build-pkg": "rollup -c rollup.pkg.config.js --environment NODE_ENV:production"
   }
 }

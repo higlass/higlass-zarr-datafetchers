@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from 'uuid';
 import { HTTPStore, openArray, slice } from 'zarr';
 
 const ZarrChromsizesDataFetcher = function ZarrChromsizesDataFetcher(HGC, ...args) {
@@ -9,11 +8,13 @@ const ZarrChromsizesDataFetcher = function ZarrChromsizesDataFetcher(HGC, ...arg
         );
     }
 
+    const { slugid } = HGC.libraries;
+
     class ZarrChromsizesDataFetcherClass {
         constructor(dataConfig, pubSub) {
             this.dataConfig = dataConfig;
             this.pubSub = pubSub;
-            this.trackUid = uuidv4();
+            this.trackUid = slugid.nice();
 
             console.log("ZarrChromsizesDataFetcherClass");
         

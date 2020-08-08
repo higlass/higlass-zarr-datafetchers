@@ -1,6 +1,22 @@
-import { v4 as uuidv4 } from 'uuid';
 import { HTTPStore, openArray, slice } from 'zarr';
-import { multivecChunksToTileDenseArray } from './utils';
+
+function multivecChunksToTileDenseArray(chunks, tileShape) {
+  // Allocate a Float32Array for the tile (with length num_samples * tile_size).
+  const fullTileLength = tileShape[0] * tileShape[1];
+  const fullTileArray = new Float32Array(fullTileLength);
+
+  // Fill in the data for each sample.
+  let offset = 0;
+  const numSamples = tileShape[0];
+  for (let sampleI = 0; sampleI < numSamples; sampleI++) {
+    for (const chunk of chunks) {
+      const chunkData = chunk.data[sampleI];
+      fullTileArray.set(chunkData, offset);
+      offset += chunkData.length;
+    }
+  }
+  return fullTileArray;
+}
 
 const ZarrMultivecDataFetcher = function ZarrMultivecDataFetcher(HGC, ...args) {
 
@@ -10,6 +26,7 @@ const ZarrMultivecDataFetcher = function ZarrMultivecDataFetcher(HGC, ...args) {
         );
     }
 
+    const { slugid } = HGC.libraries;
     const {
       absToChr,
       parseChromsizesRows,
@@ -22,7 +39,7 @@ const ZarrMultivecDataFetcher = function ZarrMultivecDataFetcher(HGC, ...args) {
     class ZarrMultivecDataFetcherClass {
         constructor(dataConfig) {
             this.dataConfig = dataConfig;
-            this.trackUid = uuidv4();
+            this.trackUid = slugid.nice();
         
             if (dataConfig.url) {
               // console.assert(dataConfig.url.endsWith('.zarr'));
