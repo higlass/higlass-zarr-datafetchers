@@ -19,7 +19,6 @@ jobs:
         cp -r ./higlass ./node_modules/higlass/dist
         cp ./higlass-register/index.js ./node_modules/higlass-register/src/index.js
         yarn build
-    - uses: pascalgn/npm-publish-action@06e0830ea83eea10ed4a62654eeaedafb8bf50fc
+    - uses: JS-DevTools/npm-publish@18351461ae08dde235c0ccee0633ec905f0b9a52
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+        token: ${{ secrets.NPM_AUTH_TOKEN }}

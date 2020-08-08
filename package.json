@@ -1,5 +1,6 @@
 {
   "name": "higlass-zarr-datafetchers",
+  "public": true,
   "version": "0.1.0",
   "description": "Fetch HiGlass track data from Zarr stores",
   "repository": {
