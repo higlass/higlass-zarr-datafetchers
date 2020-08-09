@@ -39,4 +39,4 @@ yarn run build
 
 Coming soon: [higlass-zarr-converters](https://github.com/keller-mark/higlass-zarr-converters)
 
-_For the current demo, Zarr files were generated using this script https://github.com/hms-dbmi/cistrome-explorer/blob/keller-mark/zarr-for-serverless/pipelines/cistrome-to-multivec/src/manifest_to_zarr.py_
+_For the current demo, Zarr files were generated using [this script](https://github.com/hms-dbmi/cistrome-explorer/blob/221fc8c183f0e03f83059a6735f5dbe48217b4d3/pipelines/cistrome-to-multivec/src/manifest_to_zarr.py)_
