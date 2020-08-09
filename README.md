@@ -1,3 +1,6 @@
+![npm](https://img.shields.io/npm/v/higlass-zarr-datafetchers)
+![npm bundle size](https://img.shields.io/bundlephobia/min/higlass-zarr-datafetchers)
+
 # higlass-zarr-datafetchers
 
 This repository contains plugin datafetchers for loading zarr-based files in HiGlass.
