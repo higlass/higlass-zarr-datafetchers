@@ -2,7 +2,7 @@ const viewconfig = {
     "editable": true,
     "zoomFixed": false,
     "trackSourceServers": [
-      "https://higlass.io/api/v1"
+      "//higlass.io/api/v1"
     ],
     "exportViewUrl": "/api/v1/viewconfs",
     "views": [
@@ -17,8 +17,8 @@ const viewconfig = {
         ],
         "genomePositionSearchBoxVisible": true,
         "genomePositionSearchBox": {
-          "autocompleteServer": "https://higlass.io/api/v1",
-          "chromInfoServer": "https://higlass.io/api/v1",
+          "autocompleteServer": "//higlass.io/api/v1",
+          "chromInfoServer": "//higlass.io/api/v1",
           "visible": true,
           "chromInfoId": "hg38"
         },
@@ -26,7 +26,7 @@ const viewconfig = {
           "top": [
             {
               "type": "horizontal-chromosome-labels",
-              "server": "http://higlass.io/api/v1",
+              "server": "//higlass.io/api/v1",
               "tilesetUid": "NyITQvZsS_mOFNlz5C2LJg",
               "uid": "chromosome-labels-track",
               "options": {
@@ -105,7 +105,7 @@ const viewconfig = {
               "uid": "demo-multivec-track",
               "data": {
                 "type": "zarr-multivec",
-                "url": "http://higlass-serverless.s3.amazonaws.com/multivec/Homo_sapiens__AFF4__all.multires.zarr",
+                "url": "//higlass-serverless.s3.amazonaws.com/multivec/Homo_sapiens__AFF4__all.multires.zarr",
               },
               "options": {
                 "labelPosition": "hidden",
