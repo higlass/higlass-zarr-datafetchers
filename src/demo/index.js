@@ -1,16 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import register from 'higlass-register';
 
-import ZarrMultivecDataFetcher from '../ZarrMultivecDataFetcher';
-import ZarrChromsizesDataFetcher from '../ZarrChromsizesDataFetcher';
-import ZarrHorizontalChromosomeLabelsTrack from '../ZarrHorizontalChromosomeLabelsTrack';
+import { ZarrMultivecDataFetcher } from '../index';
 
 import Demo from './Demo';
 import './index.scss';
 
-register({ dataFetcher: ZarrMultivecDataFetcher, config: ZarrMultivecDataFetcher.config }, { pluginType: 'dataFetcher' });
-register({ dataFetcher: ZarrChromsizesDataFetcher, config: ZarrChromsizesDataFetcher.config }, { pluginType: 'dataFetcher' });
-register({ track: ZarrHorizontalChromosomeLabelsTrack, config: ZarrHorizontalChromosomeLabelsTrack.config }, { pluginType: 'track' });
+// Coming soon: higlass register
+window.higlassDataFetchersByType = {
+    [ZarrMultivecDataFetcher.config.type]: {
+        dataFetcher: ZarrMultivecDataFetcher,
+    }
+}
 
 ReactDOM.render(<Demo />, document.getElementById('root'));

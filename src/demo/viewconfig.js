@@ -25,12 +25,10 @@ const viewconfig = {
         "tracks": {
           "top": [
             {
-              "type": "zarr-horizontal-chromosome-labels",
-              "uid": "GzHGPlijS2eASBqslzVcxA",
-              "data": {
-                "type": "zarr-chromsizes",
-                "url": "http://higlass-serverless.s3.amazonaws.com/chromsizes/hg38.zarr",
-              },
+              "type": "horizontal-chromosome-labels",
+              "server": "http://higlass.io/api/v1",
+              "tilesetUid": "NyITQvZsS_mOFNlz5C2LJg",
+              "uid": "chromosome-labels-track",
               "options": {
                 "showMousePosition": false,
                 "mousePositionColor": "#999999",
@@ -44,9 +42,9 @@ const viewconfig = {
             },
             {
               "type": "horizontal-gene-annotations",
-              "uid": "R6ZZ5LnEQ4ODCWZoE38maw",
-              "tilesetUid": "M9A9klpwTci5Vf4bHZ864g",
-              "server": "https://resgen.io/api/v1",
+              "server": "//higlass.io/api/v1",
+              "tilesetUid": "P0PLbQMwTYGy-5uPIQid7A",
+              "uid": "gene-labels-track",
               "options": {
                 "labelColor": "black",
                 "labelPosition": "hidden",
@@ -73,9 +71,9 @@ const viewconfig = {
             },
             {
               "type": "horizontal-bar",
-              "uid": "bmcNxj_MSEar_3nYVMnPnQ",
-              "tilesetUid": "a-iBpdh3Q_uO2FLCWKpOOw",
-              "server": "https://resgen.io/api/v1",
+              "server": "//higlass.io/api/v1",
+              "tilesetUid": "HnOFdNKyQiWEnLkn4Wb1Ug",
+              "uid": "conservation-track",
               "options": {
                 "labelColor": "black",
                 "labelPosition": "topLeft",
@@ -104,7 +102,7 @@ const viewconfig = {
           "center": [
             {
               "type": "horizontal-multivec",
-              "uid": "cistrome-aggregation-test-track-1",
+              "uid": "demo-multivec-track",
               "data": {
                 "type": "zarr-multivec",
                 "url": "http://higlass-serverless.s3.amazonaws.com/multivec/Homo_sapiens__AFF4__all.multires.zarr",

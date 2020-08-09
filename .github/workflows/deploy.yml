@@ -14,11 +14,19 @@ jobs:
         node-version: 14
     - run: |
         yarn
-        # TODO: remove
-        rm -r ./node_modules/higlass/dist
-        cp -r ./higlass ./node_modules/higlass/dist
-        cp ./higlass-register/index.js ./node_modules/higlass-register/src/index.js
         yarn build-pkg
     - uses: JS-DevTools/npm-publish@18351461ae08dde235c0ccee0633ec905f0b9a52
       with:
         token: ${{ secrets.NPM_AUTH_TOKEN }}
+  deploy-to-gh-pages:
+    name: Deploy to GitHub Pages
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v2
+    - run: |
+        yarn
+        yarn build-demo
+    - uses: alex-page/blazing-fast-gh-pages-deploy@v1.1.0
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        site-directory: build-demo

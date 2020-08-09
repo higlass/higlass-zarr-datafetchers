@@ -3,27 +3,29 @@
 
 # higlass-zarr-datafetchers
 
-This repository contains plugin datafetchers for loading zarr-based files in HiGlass.
+This repository contains plugin data fetchers for loading [Zarr](https://github.com/gzuidhof/zarr.js/)-based files in HiGlass.
 These plugins allow data to be stored in object stores such as S3 (rather than using `higlass-server`).
 
 ```sh
 yarn add zarr # peer dependency
+yarn add higlass-register # helpers for plugin registration
 yarn add higlass-zarr-datafetchers
 ```
 
+List of data fetchers currently implemented:
+
+- `zarr-multivec`: Use this data fetcher with a `horizontal-multivec` track to visualize multi-sample genome-wide continuous data with a heatmap.
+
 ## Develop
+
+### Install dependencies
 ```sh
 yarn
+```
 
-# Replace node_modules/higlass/dist directory
-# TODO: remove this step once plugin datafetcher support is released on NPM
-rm -r ./node_modules/higlass/dist
-cp -r ./higlass ./node_modules/higlass/dist
-# Replace node_modules/higlass-register/dist directory
-# TODO: remove this step once plugin datafetcher support is released on NPM
-cp ./higlass-register/index.js ./node_modules/higlass-register/src/index.js
+### Run the demo
 
-# Run the demo
+```sh
 yarn run start
 ```
 
@@ -33,13 +35,8 @@ yarn run start
 yarn run build
 ```
 
-## Publish
+## Conversion resources
 
-Create the production bundle, update the version, and publish to NPM.
+Coming soon: [higlass-zarr-converters](https://github.com/keller-mark/higlass-zarr-converters)
 
-```sh
-npm version patch
-npm publish
-```
-
-Zarr files have been generated using this script https://github.com/hms-dbmi/cistrome-explorer/blob/keller-mark/zarr-for-serverless/pipelines/cistrome-to-multivec/src/manifest_to_zarr.py
+_For the current demo, Zarr files were generated using this script https://github.com/hms-dbmi/cistrome-explorer/blob/keller-mark/zarr-for-serverless/pipelines/cistrome-to-multivec/src/manifest_to_zarr.py_
