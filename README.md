@@ -1,4 +1,4 @@
-![npm](https://img.shields.io/npm/v/higlass-zarr-datafetchers)
+[![npm](https://img.shields.io/npm/v/higlass-zarr-datafetchers)](https://www.npmjs.com/package/higlass-zarr-datafetchers)
 ![npm bundle size](https://img.shields.io/bundlephobia/min/higlass-zarr-datafetchers)
 
 # higlass-zarr-datafetchers
