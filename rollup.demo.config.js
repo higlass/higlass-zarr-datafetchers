@@ -94,7 +94,7 @@ const baseConfig = {
         }),
         html({
             title: pkg.name,
-            publicPath: '/',
+            publicPath: '/higlass-zarr-datafetchers/',
             fileName: OUTPUT_HTML,
             template: ({ publicPath, title }) => {
                 return htmlFromTemplate({
