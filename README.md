@@ -31,7 +31,7 @@ register(
 
 List of data fetchers currently implemented:
 
-- `zarr-multivec` (register with `ZarrMultivecDataFetcher`):
+- `zarr-multivec` (register with `ZarrMultivecDataFetcher`)<br/>
     Use this data fetcher with a `horizontal-multivec` track to visualize multi-sample genome-wide continuous data with a heatmap track.
 
     ```js
