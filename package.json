@@ -7,7 +7,8 @@
     "type": "git",
     "url": "https://github.com/keller-mark/higlass-zarr-datafetchers"
   },
-  "main": "build-pkg/index.min.js",
+  "main": "build-pkg/index.esm.js",
+  "unpkg": "build-pkg/index.umd.js",
   "author": "Mark Keller",
   "license": "MIT",
   "dependencies": {
