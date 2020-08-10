@@ -18,10 +18,13 @@ yarn add higlass-zarr-datafetchers
 ## Register plugin data fetchers
 
 ```js
-import register from 'higlass-register';
-import { ZarrMultivecDataFetcher } from 'higlass-zarr-datafetchers';
+import register from "higlass-register";
+import { ZarrMultivecDataFetcher } from "higlass-zarr-datafetchers";
 
-register({ dataFetcher: ZarrMultivecDataFetcher, config: ZarrMultivecDataFetcher.config }, { pluginType: 'dataFetcher' });
+register(
+    { dataFetcher: ZarrMultivecDataFetcher, config: ZarrMultivecDataFetcher.config },
+    { pluginType: "dataFetcher" }
+);
 ```
 
 ## Use in a HiGlass view config track definition
