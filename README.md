@@ -33,7 +33,7 @@ List of data fetchers currently implemented:
 
 - `zarr-multivec` (register with `ZarrMultivecDataFetcher`)
     
-    - Use this data fetcher with a `horizontal-multivec` track to visualize multi-sample genome-wide continuous data with a heatmap track.
+    - Use this data fetcher with a `horizontal-multivec` track to visualize multi-sample genome-wide continuous data.
 
     ```js
     {
@@ -46,7 +46,7 @@ List of data fetchers currently implemented:
     }
     ```
 
-    - Alternatively, use this data fetcher with a `horizontal-bar` track to visualize single-sample genome-wide continuous data (one row of a multi-sample file) with a bar track.
+    - Alternatively, use this data fetcher with a `horizontal-bar` track to visualize single-sample genome-wide continuous data (one row of a multi-sample file).
 
     ```js
     {
