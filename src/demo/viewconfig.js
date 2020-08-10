@@ -71,9 +71,12 @@ const viewconfig = {
             },
             {
               "type": "horizontal-bar",
-              "server": "//higlass.io/api/v1",
-              "tilesetUid": "HnOFdNKyQiWEnLkn4Wb1Ug",
-              "uid": "conservation-track",
+              "uid": "demo-bar-track",
+              "data": {
+                "type": "zarr-multivec",
+                "url": "//higlass-serverless.s3.amazonaws.com/multivec/Homo_sapiens__AFF4__all.multires.zarr",
+                "row": 2,
+              },
               "options": {
                 "labelColor": "black",
                 "labelPosition": "topLeft",
@@ -84,7 +87,6 @@ const viewconfig = {
                 "trackBorderColor": "black",
                 "labelTextOpacity": 0.4,
                 "barOpacity": 1,
-                "name": "conservation (hg38.phastCons100way.bw)",
                 "align": "bottom",
                 "labelLeftMargin": 0,
                 "labelRightMargin": 0,
@@ -124,7 +126,7 @@ const viewconfig = {
                 "colorbarPosition": "bottomLeft",
                 "zeroValueColor": "dimgray",
                 "selectRows": null,
-                "selectRowsAggregationMethod": "server",
+                "selectRowsAggregationMethod": "client",
                 "selectRowsAggregationMode": "sum",
                 "selectRowsAggregationWithRelativeHeight": false,
                 "colorbarBackgroundColor": "#ffffff",

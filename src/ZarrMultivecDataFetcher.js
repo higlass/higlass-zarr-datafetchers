@@ -1,20 +1,31 @@
 import { HTTPStore, openArray, slice } from 'zarr';
 
-function multivecChunksToTileDenseArray(chunks, tileShape) {
-  // Allocate a Float32Array for the tile (with length num_samples * tile_size).
-  const fullTileLength = tileShape[0] * tileShape[1];
+function multivecChunksToTileDenseArray(chunks, tileShape, isRow) {
+  // Allocate a Float32Array for the tile (with length tile_size).
+  const fullTileLength = (isRow ? tileShape[1] : tileShape[0] * tileShape[1]);
   const fullTileArray = new Float32Array(fullTileLength);
 
-  // Fill in the data for each sample.
+  // Fill in the data for each sample and chunk.
   let offset = 0;
-  const numSamples = tileShape[0];
-  for (let sampleI = 0; sampleI < numSamples; sampleI++) {
+  if(isRow) {
+    // Single row, no need to iterate over samples.
     for (const chunk of chunks) {
-      const chunkData = chunk.data[sampleI];
+      const chunkData = chunk.data;
       fullTileArray.set(chunkData, offset);
       offset += chunkData.length;
     }
+  } else {
+    // Multi-row, need to iterate over samples.
+    const numSamples = tileShape[0];
+    for (let sampleI = 0; sampleI < numSamples; sampleI++) {
+      for (const chunk of chunks) {
+        const chunkData = chunk.data[sampleI];
+        fullTileArray.set(chunkData, offset);
+        offset += chunkData.length;
+      }
+    }
   }
+  
   return fullTileArray;
 }
 
@@ -45,6 +56,10 @@ const ZarrMultivecDataFetcher = function ZarrMultivecDataFetcher(HGC, ...args) {
               // console.assert(dataConfig.url.endsWith('.zarr'));
               // S3 bucket must have a CORS policy to allow reading from any origin.
               this.store = new HTTPStore(dataConfig.url);
+            }
+
+            if(dataConfig.row !== undefined) {
+              this.row = dataConfig.row;
             }
         }
 
@@ -175,10 +190,13 @@ const ZarrMultivecDataFetcher = function ZarrMultivecDataFetcher(HGC, ...args) {
                     store,
                     path: `/chromosomes/${chrName}/${resolution}/`,
                     mode: 'r',
-                  }).then(arr => arr.get([null, slice(zStart, zEnd)]));
+                  }).then(arr => (this.row !== undefined
+                    ? arr.getRaw([this.row, slice(zStart, zEnd)])
+                    : arr.get([null, slice(zStart, zEnd)])
+                  ));
                 }),
               ).then(chunks => {
-                const dense = multivecChunksToTileDenseArray(chunks, [tsInfo.shape[1], tsInfo.shape[0]]);
+                const dense = multivecChunksToTileDenseArray(chunks, [tsInfo.shape[1], tsInfo.shape[0]], this.row !== undefined);
                 return Promise.resolve({
                   dense,
                   denseDataExtrema: new DenseDataExtrema1D(dense),

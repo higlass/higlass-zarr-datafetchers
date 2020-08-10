@@ -7,15 +7,47 @@ This repository contains plugin data fetchers for loading [Zarr](https://zarr.re
 These plugins allow data to be stored in object stores such as S3 (rather than using [higlass-server](https://github.com/higlass/higlass-server)).
 Plugin data fetchers can be registered using [higlass-register](https://github.com/higlass/higlass-register).
 
+## Installation
+
 ```sh
 yarn add zarr # peer dependency
 yarn add higlass-register # helpers for plugin registration
 yarn add higlass-zarr-datafetchers
 ```
 
+## Register plugin data fetchers
+
+## Use in a HiGlass view config track definition
+
 List of data fetchers currently implemented:
 
-- `zarr-multivec`: Use this data fetcher with a `horizontal-multivec` track to visualize multi-sample genome-wide continuous data with a heatmap.
+- `zarr-multivec`:
+    Use this data fetcher with a `horizontal-multivec` track to visualize multi-sample genome-wide continuous data with a heatmap track.
+
+    ```js
+    {
+        "type": "horizontal-multivec",
+        "uid": "demo-multivec-track",
+        "data": {
+            "type": "zarr-multivec",
+            "url": "//higlass-serverless.s3.amazonaws.com/multivec/Homo_sapiens__AFF4__all.multires.zarr",
+        },
+    }
+    ```
+
+    Alternatively, use this data fetcher with a `horizontal-bar` track to visualize single-sample genome-wide continuous data (one row of a multi-sample file) with a bar track.
+
+    ```js
+    {
+        "type": "horizontal-bar",
+        "uid": "demo-bar-track",
+        "data": {
+            "type": "zarr-multivec",
+            "url": "//higlass-serverless.s3.amazonaws.com/multivec/Homo_sapiens__AFF4__all.multires.zarr",
+            "row": 0, // the index of a row of interest
+        },
+    }
+    ```
 
 ## Develop
 
