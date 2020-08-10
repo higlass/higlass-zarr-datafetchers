@@ -1,16 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import register from 'higlass-register';
 import { ZarrMultivecDataFetcher } from '../index';
 
 import Demo from './Demo';
 import './index.scss';
 
-// Coming soon: higlass register
-window.higlassDataFetchersByType = {
-    [ZarrMultivecDataFetcher.config.type]: {
-        dataFetcher: ZarrMultivecDataFetcher,
-    }
-}
+register({ dataFetcher: ZarrMultivecDataFetcher, config: ZarrMultivecDataFetcher.config }, { pluginType: 'dataFetcher' });
 
 ReactDOM.render(<Demo />, document.getElementById('root'));

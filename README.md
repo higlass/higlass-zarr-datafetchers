@@ -4,7 +4,8 @@
 # higlass-zarr-datafetchers
 
 This repository contains plugin data fetchers for loading [Zarr](https://zarr.readthedocs.io/en/stable/)-based files in HiGlass.
-These plugins allow data to be stored in object stores such as S3 (rather than using `higlass-server`).
+These plugins allow data to be stored in object stores such as S3 (rather than using [higlass-server](https://github.com/higlass/higlass-server)).
+Plugin data fetchers can be registered using [higlass-register](https://github.com/higlass/higlass-register).
 
 ```sh
 yarn add zarr # peer dependency

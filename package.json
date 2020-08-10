@@ -27,7 +27,7 @@
     "deep-diff": "^1.0.2",
     "documentation": "^12.1.4",
     "eslint": "^6.8.0",
-    "higlass-register": "^0.1.0",
+    "higlass-register": "^0.3.0",
     "higlass": "^1.11.0",
     "pixi.js": "^5.0.3",
     "react": "^16.12.0",
