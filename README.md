@@ -17,11 +17,18 @@ yarn add higlass-zarr-datafetchers
 
 ## Register plugin data fetchers
 
+```js
+import register from 'higlass-register';
+import { ZarrMultivecDataFetcher } from 'higlass-zarr-datafetchers';
+
+register({ dataFetcher: ZarrMultivecDataFetcher, config: ZarrMultivecDataFetcher.config }, { pluginType: 'dataFetcher' });
+```
+
 ## Use in a HiGlass view config track definition
 
 List of data fetchers currently implemented:
 
-- `zarr-multivec`:
+- `zarr-multivec` (register with `ZarrMultivecDataFetcher`):
     Use this data fetcher with a `horizontal-multivec` track to visualize multi-sample genome-wide continuous data with a heatmap track.
 
     ```js
@@ -44,7 +51,7 @@ List of data fetchers currently implemented:
         "data": {
             "type": "zarr-multivec",
             "url": "//higlass-serverless.s3.amazonaws.com/multivec/Homo_sapiens__AFF4__all.multires.zarr",
-            "row": 0, // the index of a row of interest
+            "row": 0, // specify the index of a row of interest
         },
     }
     ```
