@@ -1,7 +1,7 @@
 {
   "name": "higlass-zarr-datafetchers",
   "public": true,
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Fetch HiGlass track data from Zarr stores",
   "repository": {
     "type": "git",
@@ -12,7 +12,7 @@
   "author": "Mark Keller",
   "license": "MIT",
   "dependencies": {
-    "zarr": "^0.3.0"
+    "zarr": "^0.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",

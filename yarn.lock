@@ -6020,12 +6020,10 @@ number-is-nan@^1.0.0:
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
   integrity sha1-CXtgK1NCKlIsGvuHkDGDNpQaAR0=
 
-numcodecs@^0.1.0:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/numcodecs/-/numcodecs-0.1.1.tgz#036230e6d681ff7e838e9b292d3657ef576f12a0"
-  integrity sha512-UjKulZ6GIFKLdBIczEbsoXNZQmiHafpoIdo39YcdecHVGyMKh0+azsfHTrybXm5RZwepqLZv24mkjqGdZGm24Q==
-  dependencies:
-    pako "^1.0.11"
+numcodecs@^0.2.0:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/numcodecs/-/numcodecs-0.2.1.tgz#3b07e180729e0b6eab078b43d4193864a7e963dd"
+  integrity sha512-0ktyCFBEno8mLuC/bTfJk8LjDy7GvQOa9Ern2zsAhM8sU5uiUGZPyXVzD7kEtx90fRPzohodg1fd82/xzAupLA==
 
 nwsapi@^2.2.0:
   version "2.2.0"
@@ -6275,7 +6273,7 @@ p-try@^2.0.0:
   resolved "https://registry.yarnpkg.com/p-try/-/p-try-2.2.0.tgz#cb2868540e313d61de58fafbe35ce9004d5540e6"
   integrity sha512-R4nPAVTAU0B9D35/Gk3uJf/7XYbQcyohSKdvAxIRSNghFl4e71hVoGnBNQz9cWaXxO2I10KTC+3jMdvvoKw6dQ==
 
-pako@^1.0.10, pako@^1.0.11:
+pako@^1.0.10:
   version "1.0.11"
   resolved "https://registry.yarnpkg.com/pako/-/pako-1.0.11.tgz#6c9599d340d54dfd3946380252a35705a6b992bf"
   integrity sha512-4hLB8Py4zZce5s4yd9XzopqwVv/yGNhV1Bl8NTmCq1763HeK2+EwVTv+leGeL13Dnh2wfbqowVPXCIO0z4taYw==
@@ -8385,11 +8383,6 @@ trough@^1.0.0:
   dependencies:
     glob "^7.1.2"
 
-ts-interface-checker@^0.1.10:
-  version "0.1.13"
-  resolved "https://registry.yarnpkg.com/ts-interface-checker/-/ts-interface-checker-0.1.13.tgz#784fd3d679722bc103b1b4b8030bcddb5db2a699"
-  integrity sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==
-
 tslib@^1.9.0:
   version "1.13.0"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.13.0.tgz#c881e13cc7015894ed914862d276436fa9a47043"
@@ -9173,12 +9166,10 @@ yargs@~3.10.0:
     decamelize "^1.0.0"
     window-size "0.1.0"
 
-zarr@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/zarr/-/zarr-0.3.0.tgz#232fd35eea3a40009b74ce5a1460179144fb064a"
-  integrity sha512-LKT2PugbaySj3M7i/bYIIr1eN4mvBYSrveWuTQK+2ZRgDjqNzt8va0rNCIv3s9dXfJhIIKrvUyftPrJG3lj/Fg==
+zarr@^0.4.0:
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/zarr/-/zarr-0.4.2.tgz#4b505ff99c4bc3a3d0738e57f6f6abb2a2353670"
+  integrity sha512-zyC1DaVURXqSEP6O0R8XOYa83RZkCpEHLUFOCsYn1a5n1j6ojwzwoUgeMOtHuNfuJwUnb8dGK0g3gTGGs87QiQ==
   dependencies:
-    numcodecs "^0.1.0"
+    numcodecs "^0.2.0"
     p-queue "6.2.0"
-    pako "^1.0.11"
-    ts-interface-checker "^0.1.10"
