@@ -1,4 +1,6 @@
-import { HTTPStore, openArray, slice } from 'zarr';
+import { FetchStore } from '@zarrita/storage';
+import { open as zarrOpen, root as zarrRoot } from '@zarrita/core';
+import { slice, get as zarrGet } from '@zarrita/indexing';
 
 function multivecChunksToTileDenseArray(chunks, tileShape, isRow) {
   // Allocate a Float32Array for the tile (with length tile_size).
@@ -55,7 +57,8 @@ const ZarrMultivecDataFetcher = function ZarrMultivecDataFetcher(HGC, ...args) {
             if (dataConfig.url) {
               // console.assert(dataConfig.url.endsWith('.zarr'));
               // S3 bucket must have a CORS policy to allow reading from any origin.
-              this.store = new HTTPStore(dataConfig.url, { supportedMethods: ['GET'] });
+              this.store = new FetchStore(dataConfig.url);
+              this.storeRoot = zarrRoot(this.store);
             }
 
             if(dataConfig.row !== undefined) {
@@ -67,14 +70,10 @@ const ZarrMultivecDataFetcher = function ZarrMultivecDataFetcher(HGC, ...args) {
             this.tilesetInfoLoading = true;
         
             // Use the tileset_info stored as JSON in file.zarr/.zattrs
-            return this.store
-              .getItem('.zattrs')
-              .then(bytes => {
-                const decoder = new TextDecoder('utf-8');
-                const json = JSON.parse(decoder.decode(bytes));
-                return json;
-              })
-              .then(attrs => {
+            return this.storeRoot
+              .then(root => zarrOpen(root))
+              .then(grp => {
+                const attrs = grp.attrs;
                 this.tilesetInfoLoading = false;
 
                 const chromSizes = attrs.multiscales.map(d => ([d.name, d.metadata.chromsize]));
@@ -142,7 +141,7 @@ const ZarrMultivecDataFetcher = function ZarrMultivecDataFetcher(HGC, ...args) {
           }
         
           tile(z, x, tileId) {
-            const { store } = this;
+            const { storeRoot } = this;
             return this.tilesetInfo().then(tsInfo => {
               // const multiscales = tsInfo.multiscales;
         
@@ -186,13 +185,11 @@ const ZarrMultivecDataFetcher = function ZarrMultivecDataFetcher(HGC, ...args) {
               // since data for each chromosome is stored in a separate zarr array.
               return Promise.all(
                 chrChunks.map(([chrName, zStart, zEnd]) => {
-                  return openArray({
-                    store,
-                    path: `/chromosomes/${chrName}/${resolution}/`,
-                    mode: 'r',
-                  }).then(arr => (this.row !== undefined
-                    ? arr.getRaw([this.row, slice(zStart, zEnd)])
-                    : arr.get([null, slice(zStart, zEnd)])
+                  return (await storeRoot)
+                    .then(root => zarrOpen(root.resolve(`/chromosomes/${chrName}/${resolution}/`), { kind: "array" }))
+                    .then(arr => (this.row !== undefined
+                    ? zarrGet(arr, [this.row, slice(zStart, zEnd)])
+                    : zarrGet(arr, [null, slice(zStart, zEnd)])
                   ));
                 }),
               ).then(chunks => {
