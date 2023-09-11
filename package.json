@@ -12,7 +12,9 @@
   "author": "Mark Keller",
   "license": "MIT",
   "dependencies": {
-    "zarr": "^0.4.0"
+    "@zarrita/core": "^0.0.3",
+    "@zarrita/storage": "^0.0.2",
+    "@zarrita/indexing": "^0.0.3"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
