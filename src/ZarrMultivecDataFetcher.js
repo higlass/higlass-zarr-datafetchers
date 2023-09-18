@@ -1,6 +1,10 @@
-import { FetchStore } from '@zarrita/storage';
-import { open as zarrOpen, root as zarrRoot } from '@zarrita/core';
-import { slice, get as zarrGet } from '@zarrita/indexing';
+import {
+  open as zarrOpen,
+  root as zarrRoot,
+  get as zarrGet,
+  slice,
+  FetchStore,
+} from 'zarrita';
 
 function multivecChunksToTileDenseArray(chunks, tileShape, isRow) {
   // Allocate a Float32Array for the tile (with length tile_size).
@@ -21,7 +25,8 @@ function multivecChunksToTileDenseArray(chunks, tileShape, isRow) {
     const numSamples = tileShape[0];
     for (let sampleI = 0; sampleI < numSamples; sampleI++) {
       for (const chunk of chunks) {
-        const chunkData = chunk.data[sampleI];
+        // Zarrita returns strided arrays.
+        const chunkData = chunk.data.subarray(sampleI * chunk.stride[0], (sampleI+1) * chunk.stride[0]);
         fullTileArray.set(chunkData, offset);
         offset += chunkData.length;
       }
@@ -58,7 +63,7 @@ const ZarrMultivecDataFetcher = function ZarrMultivecDataFetcher(HGC, ...args) {
               // console.assert(dataConfig.url.endsWith('.zarr'));
               // S3 bucket must have a CORS policy to allow reading from any origin.
               this.store = new FetchStore(dataConfig.url);
-              this.storeRoot = zarrRoot(this.store);
+              this.storeRoot = Promise.resolve(zarrRoot(this.store));
             }
 
             if(dataConfig.row !== undefined) {
@@ -185,7 +190,7 @@ const ZarrMultivecDataFetcher = function ZarrMultivecDataFetcher(HGC, ...args) {
               // since data for each chromosome is stored in a separate zarr array.
               return Promise.all(
                 chrChunks.map(([chrName, zStart, zEnd]) => {
-                  return (await storeRoot)
+                  return storeRoot
                     .then(root => zarrOpen(root.resolve(`/chromosomes/${chrName}/${resolution}/`), { kind: "array" }))
                     .then(arr => (this.row !== undefined
                     ? zarrGet(arr, [this.row, slice(zStart, zEnd)])
