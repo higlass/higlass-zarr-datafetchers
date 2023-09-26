@@ -1,4 +1,58 @@
-const viewconfig = {
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HiGlass Zarr Data Fetcher</title>
+  <style type="text/css">
+    .canvasjs-chart-credit {
+      display: none;
+    }
+  </style>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/higlass@1.12.4/dist/hglib.css">
+  <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/pixi.js@5/dist/pixi.min.js"></script>
+  <script crossorigin src="https://unpkg.com/higlass@1.12.4/dist/hglib.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-bootstrap/0.32.1/react-bootstrap.min.js"></script>
+</head>
+<body>
+Here's some text
+<div style=""></div>
+<div style="margin: auto">
+  <div style="height: 1500px; width: 600px; border: 1px solid black;"
+       id="development-demo">
+  </div>
+</div>
+And some other text
+<div style="height: 1500px"></div>
+</body>
+<script>
+  (function (i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+  })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+  ga('create', 'UA-77756807-1', 'auto');
+  ga('send', 'pageview');
+</script>
+<script type="module">
+  import register from 'higlass-register';
+  import { ZarrMultivecDataFetcher } from './dist/index.js';
+
+  register(
+    { dataFetcher: ZarrMultivecDataFetcher, config: ZarrMultivecDataFetcher.config },
+    { pluginType: "dataFetcher" }
+  );
+
+  const viewConfig = {
     "editable": true,
     "zoomFixed": false,
     "trackSourceServers": [
@@ -74,7 +128,7 @@ const viewconfig = {
               "uid": "demo-bar-track",
               "data": {
                 "type": "zarr-multivec",
-                "url": "//higlass-serverless.s3.amazonaws.com/multivec/Homo_sapiens__AFF4__all.multires.zarr",
+                "url": "https://higlass-serverless.s3.amazonaws.com/multivec/Homo_sapiens__AFF4__all.multires.zarr",
                 "row": 2,
               },
               "options": {
@@ -107,7 +161,7 @@ const viewconfig = {
               "uid": "demo-multivec-track",
               "data": {
                 "type": "zarr-multivec",
-                "url": "//higlass-serverless.s3.amazonaws.com/multivec/Homo_sapiens__AFF4__all.multires.zarr",
+                "url": "https://higlass-serverless.s3.amazonaws.com/multivec/Homo_sapiens__AFF4__all.multires.zarr",
               },
               "options": {
                 "labelPosition": "hidden",
@@ -165,4 +219,10 @@ const viewconfig = {
     }
 };
 
-export default viewconfig;
+  window.hglib.viewer(
+    document.getElementById('development-demo'),
+    viewConfig,
+    { bounded: false },
+  );
+</script>
+</html>
