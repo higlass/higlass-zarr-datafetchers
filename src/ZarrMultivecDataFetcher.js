@@ -62,7 +62,7 @@ const ZarrMultivecDataFetcher = function ZarrMultivecDataFetcher(HGC, ...args) {
             if (dataConfig.url) {
               // console.assert(dataConfig.url.endsWith('.zarr'));
               // S3 bucket must have a CORS policy to allow reading from any origin.
-              const { url, options } = dataConfig;
+              const { url, options = {} } = dataConfig;
               this.store = new FetchStore(url, options);
               this.storeRoot = Promise.resolve(zarrRoot(this.store));
             }
