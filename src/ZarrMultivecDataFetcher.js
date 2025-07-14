@@ -58,8 +58,15 @@ const ZarrMultivecDataFetcher = function ZarrMultivecDataFetcher(HGC, ...args) {
         constructor(dataConfig) {
             this.dataConfig = dataConfig;
             this.trackUid = slugid.nice();
-        
-            if (dataConfig.url) {
+
+            if (dataConfig.hasStoreRoot) {
+              // We cannot pass the storeRoot directly, since HiGlass
+              // stringifies the dataConfig.
+              // Reference: https://github.com/higlass/higlass/blob/e6ddd547ec9e6b2298e2c42c8dbf664039cbf098/app/scripts/data-fetchers/DataFetcher.js#L108
+
+              // Instead, we store the storeRoot on a global, keyed by its URL.
+              this.storeRoot = Promise.resolve(ZarrMultivecDataFetcher.urlToStoreRoot[dataConfig.url]);
+            } else if (dataConfig.url) {
               // console.assert(dataConfig.url.endsWith('.zarr'));
               // S3 bucket must have a CORS policy to allow reading from any origin.
               const { url, options = {} } = dataConfig;
@@ -228,5 +235,7 @@ const ZarrMultivecDataFetcher = function ZarrMultivecDataFetcher(HGC, ...args) {
 ZarrMultivecDataFetcher.config = {
     type: 'zarr-multivec',
 };
+
+ZarrMultivecDataFetcher.urlToStoreRoot = {};
 
 export default ZarrMultivecDataFetcher;

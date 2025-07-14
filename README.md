@@ -64,19 +64,19 @@ List of data fetchers currently implemented:
 
 ### Install dependencies
 ```sh
-yarn
+npm install
 ```
 
 ### Run the demo
 
 ```sh
-yarn run start
+npm run start
 ```
 
 ## Build
 
 ```sh
-yarn run build
+npm run build
 ```
 
 ## Conversion resources
